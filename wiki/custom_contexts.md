@@ -85,3 +85,14 @@ context.paperback = {
   full_hand = G.play.cards
 }
 ```
+
+### Drawing cards
+
+Allows adding to the amount of cards drawn at any time.
+
+```lua
+context.paperback = {
+  drawing_cards = true,
+  amount = hand_space, -- integer: the amount of cards drawn initially (does not take into account cards added by this context)
+}
+```
