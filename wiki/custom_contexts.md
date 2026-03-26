@@ -34,12 +34,25 @@ context.paperback = {
 }
 ```
 
-### Destroying Joker
+### Destroying Non-Playing Card
 
-This context is used for effects after a joker is destroyed.
+This context is used for effects after a card other than a playing card is destroyed.
 
 ```lua
 context.paperback = {
+  destroying_non_playing_card = true,
+  destroyed_card = self -- Card: the card that was destroyed
+}
+```
+
+### Destroying Joker
+
+This context is used for effects after specifically a joker is destroyed. This is a subset of the above context.
+
+```lua
+context.paperback = {
+  destroying_non_playing_card = true,
+  destroyed_card = self -- Card: the card that was destroyed
   destroying_joker = true,
   destroyed_joker = self -- Card: the joker that was destroyed
 }
@@ -94,5 +107,35 @@ Allows adding to the amount of cards drawn at any time.
 context.paperback = {
   drawing_cards = true,
   amount = hand_space, -- integer: the amount of cards drawn initially (does not take into account cards added by this context)
+}
+```
+
+### Nichola
+
+This context calculates after playing cards are done scoring, but before jokers trigger. This context comes with the usual during-scoring context values, like context.full_hand. Specifically used for Nichola.
+
+```lua
+context.paperback = {
+  nichola = true
+}
+```
+
+### Before Joker Effects
+
+This context calculates before jokers trigger. Unlike context.paperback.nichola, this does not pass any info about the current played hand. Used for Journal.
+
+```lua
+context.paperback = {
+  before_joker_effects = true
+}
+```
+
+### Sold E.G.O. Gift
+
+This context calculates to trigger an E.G.O. gift's sell effect (when you manually sell it or when the Corroded sticker force-sells it).
+
+```lua
+context.paperback = {
+  sold_ego_gift = card -- Card: the E.G.O. gift being sold
 }
 ```

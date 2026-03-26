@@ -9,10 +9,14 @@ paperback = {
   requires_custom_suits = true, -- Makes this object only available in pool if Custom Suits are enabled in config
   requires_crowns = true, -- Makes this object require at least one card to be a Crown to be in the pool (ignores wild cards)
   requires_stars = true, -- Makes this object require at least one card to be a Star to be in the pool (ignores wild cards)
+  requires_spectrum_or_suit = true, -- Makes this object require a Spectrum to be played (allows wild cards) or at least one card to be any modded suit (ignores wild cards)
   requires_enhancements = true, -- Makes this object only available in pool if Enhancements are enabled in config
   requires_paperclips = true, -- Makes this object only available in pool if Paperclips are enabled in config
   requires_minor_arcana = true, -- Makes this object only available in pool if Minor Arcana are enabled in config
   requires_tags = true, -- Makes this object only available in pool if Tags are enabled in config
+  requires_editions = true, -- Makes this object only available in pool if Editions are enabled in config
+  requires_ranks = true -- Makes this object only available in pool if Ranks are enabled in config
+  requires_ego_gifts = true -- Makes this object only available in pool if E.G.O. Gifts are enabled in config
 }
 ```
 
@@ -23,7 +27,7 @@ paperback = {
 
 ```lua
 paperback = {
-  ignores_the_world = true, -- Whether this joker ignores the effect applied by The World joker, used by Solemn Lament and B-Soda
+  ignores_the_world = true, -- Whether this joker ignores the effect applied by The World joker, used by B-Soda
 }
 ```
 
