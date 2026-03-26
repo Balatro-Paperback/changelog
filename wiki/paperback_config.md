@@ -39,3 +39,69 @@ paperback = {
   create_stars = true, -- Makes this Back create a full suit of Stars
 }
 ```
+
+## Extra Button
+
+Allows cards to contain an additional button located on the middle left of the card when highlighted.
+
+```lua
+paperback = {
+  extra_button = {
+    text = 'b_use', -- The localization key for the button text. This key should be in `misc.dictionary` within the localization file.
+    colour = G.C.WHITE, -- Background color of the button, default is G.C.PAPERBACK_MAIN_COLOR
+    text_colour = G.C.BLACK, -- Text color of the button, default is G.C.UI.TEXT_LIGHT
+
+    -- Run when the button is clicked. `self` refers to the table `extra_button` and `card` is the card this button is attached to.
+    click = function(self, card)
+      SMODS.calculate_effect({ message = "You're rich!" }, card) -- shows a message when clicked
+    end,
+
+    -- Must return a boolean value. Decides whether the button can be used, if this returns false,
+    -- the button will be greyed out and the click function will not run when clicked.
+    -- NOTE: This function is called every frame that the button UI element exists on screen.
+    can_use = function(self, card)
+      return G.GAME.dollars > 10 -- this button can only be used when you have more than 10 dollars
+    end,
+
+    -- Must return a boolean value. Decides whether the button will appear on a specific card.
+    -- It will appear on any highlighted card by default, any additional conditions can be specified here.
+    should_show = function(self, card)
+      return card.area == G.jokers -- this button will only show up on highlighted cards in the Jokers area
+    end
+  }
+}
+```
+
+### Dynamically changing text and colors
+
+At any point in time, you can change what localization key, background color or text color the extra button will use.
+
+For text, it's as simple as modifying the value to a different localization key. For example, within the button click function.
+
+```lua
+click = function(self, card)
+  self.text = 'another_loc_key'
+end
+```
+
+As for colors it's not as simple, first you need to assign the button a copy of the color, rather than a direct reference to one:
+
+```lua
+extra_button = {
+  colour = copy_table(G.C.WHITE)
+}
+```
+
+And then, to modify it you need to individually change each of the RGBA values:
+
+```lua
+click = function(self, card)
+  self.colour[1] = 0 -- red
+  self.colour[2] = 0 -- green
+  self.colour[3] = 0 -- blue
+  self.colour[4] = 1 -- alpha
+end
+```
+
+> [!NOTE]
+> Changing these values does not necessarily have to be done within the button functions, as long as you have access to the center you can modify the config values at any time.
