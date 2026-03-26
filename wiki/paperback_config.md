@@ -28,6 +28,8 @@ paperback = {
 ```lua
 paperback = {
   ignores_the_world = true, -- Whether this joker ignores the effect applied by The World joker, used by B-Soda
+  permanently_eternal = true, -- Two of Pentacles cannot remove eternal from this joker
+  indestructible = true, -- Internally treated as Eternal and Nine of Swords cannot destroy this joker
 }
 ```
 
